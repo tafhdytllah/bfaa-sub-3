@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_row_repository"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="28dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:background="@drawable/bg_card_item">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_name_item_repository"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="74dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/nunito_sans"
+        android:maxLines="1"
+        android:textColor="#0969da"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="bfa-github-user" />
+
+    <TextView
+        android:id="@+id/tv_visibility_item_repo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/bg_label_visibility"
+        android:paddingStart="16dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="2dp"
+        tools:text="Public"
+        android:fontFamily="@font/nunito_sans"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name_item_repository"
+        app:layout_constraintStart_toEndOf="@+id/tv_name_item_repository"
+        app:layout_constraintTop_toTopOf="@+id/tv_name_item_repository"
+        tools:ignore="SmallSp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_language_item_repository"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="Kotlin"
+        android:fontFamily="@font/nunito_sans"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_name_item_repository"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_name_item_repository"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_item_repository" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_update_at_item_repository"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        tools:text="Update 20 days ago"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:fontFamily="@font/nunito_sans"
+        app:layout_constraintBottom_toBottomOf="@id/tv_language_item_repository"
+        app:layout_constraintStart_toEndOf="@id/tv_language_item_repository" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.6dp"
+        android:layout_marginTop="24dp"
+        android:background="#0969da"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_language_item_repository"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

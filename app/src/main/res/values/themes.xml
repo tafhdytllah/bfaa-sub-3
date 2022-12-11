@@ -1,0 +1,57 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.GitHubUserApp" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/black_grey</item>
+        <item name="colorPrimaryVariant">@color/black_grey_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/grey</item>
+        <item name="colorSecondaryVariant">@color/grey_dark</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="TextContent">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:lines">1</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/nunito_sans</item>
+        <item name="android:layout_marginTop">8dp</item>
+    </style>
+    <style name="TextContent.Large">
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="TextContent.Medium">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="AppTheme.Toolbar" parent="Theme.GitHubUserApp">
+        <!--This line changes the color of text in Toolbar-->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!--This line changes the color of icons in toolbar (back, overflow menu icons)-->
+        <item name="android:textColorSecondary">@color/white</item>
+
+        <item name="android:textColorHint">@color/grey_light</item>
+    </style>
+
+    <style name="TextContent.Toolbar.TitleTextExpan" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextContent.Toolbar.TitleTextCollapse" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    
+    <style name="ProgressBarBlue" parent="Theme.AppCompat">
+        <item name="colorAccent">#39A7FF</item>
+    </style>
+
+</resources>
