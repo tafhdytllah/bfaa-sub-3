@@ -1,4 +1,4 @@
-package com.tafh.githubuserapp.ui.fragment
+package com.tafh.githubuserapp.ui.repository
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tafh.githubuserapp.R
-import com.tafh.githubuserapp.adapters.SectionPagerAdapter.Companion.ARG_USERNAME_DETAIL
-import com.tafh.githubuserapp.adapters.RepoAdapter
+import com.tafh.githubuserapp.ui.adapter.SectionPagerAdapter.Companion.ARG_USERNAME_DETAIL
+import com.tafh.githubuserapp.ui.adapter.RepoAdapter
 import com.tafh.githubuserapp.data.remote.response.Repository
 import com.tafh.githubuserapp.databinding.FragmentRepositoryBinding
-import com.tafh.githubuserapp.viewmodel.DetailUserViewModel
+import com.tafh.githubuserapp.ui.detail.DetailUserViewModel
 
 class RepositoryFragment : Fragment(R.layout.fragment_repository) {
 

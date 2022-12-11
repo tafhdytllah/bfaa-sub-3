@@ -1,4 +1,4 @@
-package com.tafh.githubuserapp.viewmodel
+package com.tafh.githubuserapp.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

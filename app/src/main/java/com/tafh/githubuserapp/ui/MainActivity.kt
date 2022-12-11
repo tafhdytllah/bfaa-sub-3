@@ -1,4 +1,4 @@
-package com.tafh.githubuserapp.ui.activity
+package com.tafh.githubuserapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

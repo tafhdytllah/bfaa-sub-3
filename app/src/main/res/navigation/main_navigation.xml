@@ -7,17 +7,20 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.tafh.githubuserapp.ui.fragment.HomeFragment"
+        android:name="com.tafh.githubuserapp.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_detailUserFragment"
             app:destination="@id/detailUserFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/detailUserFragment"
-        android:name="com.tafh.githubuserapp.ui.fragment.DetailUserFragment"
+        android:name="com.tafh.githubuserapp.ui.detail.DetailUserFragment"
         android:label="fragment_detail_user"
         tools:layout="@layout/fragment_detail_user" >
         <argument
@@ -29,22 +32,27 @@
     </fragment>
     <fragment
         android:id="@+id/followerFragment"
-        android:name="com.tafh.githubuserapp.ui.fragment.FollowerFragment"
+        android:name="com.tafh.githubuserapp.ui.follower.FollowerFragment"
         android:label="fragment_follower"
         tools:layout="@layout/fragment_follower" />
     <fragment
         android:id="@+id/followingFragment"
-        android:name="com.tafh.githubuserapp.ui.fragment.FollowingFragment"
+        android:name="com.tafh.githubuserapp.ui.following.FollowingFragment"
         android:label="fragment_following"
         tools:layout="@layout/fragment_following" />
     <activity
         android:id="@+id/splashScreenActivity"
-        android:name="com.tafh.githubuserapp.ui.activity.SplashScreenActivity"
+        android:name="com.tafh.githubuserapp.ui.splash.SplashScreenActivity"
         android:label="activity_splash_screen"
         tools:layout="@layout/activity_splash_screen" />
     <fragment
         android:id="@+id/repositoryFragment"
-        android:name="com.tafh.githubuserapp.ui.fragment.RepositoryFragment"
+        android:name="com.tafh.githubuserapp.ui.repository.RepositoryFragment"
         android:label="fragment_repository"
         tools:layout="@layout/fragment_repository" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.tafh.githubuserapp.ui.favorite.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>

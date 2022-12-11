@@ -1,4 +1,4 @@
-package com.tafh.githubuserapp.adapters
+package com.tafh.githubuserapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

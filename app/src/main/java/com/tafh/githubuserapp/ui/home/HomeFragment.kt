@@ -1,7 +1,8 @@
-package com.tafh.githubuserapp.ui.fragment
+package com.tafh.githubuserapp.ui.home
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.*
@@ -9,17 +10,18 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tafh.githubuserapp.R
-import com.tafh.githubuserapp.adapters.UserAdapter
+import com.tafh.githubuserapp.ui.adapter.UserAdapter
 import com.tafh.githubuserapp.data.remote.response.User
 import com.tafh.githubuserapp.databinding.FragmentHomeBinding
-import com.tafh.githubuserapp.viewmodel.HomeViewModel
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -44,6 +46,25 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.hide()
+
+        (activity as AppCompatActivity).supportActionBar?.hide()
+        binding.apply {
+            toolbarHome.setNavigationOnClickListener { it.findNavController().navigateUp() }
+            toolbarHome.inflateMenu(R.menu.menu_home)
+            toolbarHome.setOnMenuItemClickListener(object : Toolbar.OnMenuItemClickListener {
+                override fun onMenuItemClick(item: MenuItem?): Boolean {
+                    when (item?.itemId) {
+                        R.id.action_favorite -> {
+                            moveToFavorite()
+                            return true
+                        }
+                        else -> {
+                            return false
+                        }
+                    }
+                }
+            })
+        }
 
         homeViewModel.isLoading.observe(viewLifecycleOwner, {
             showLoading(it)
@@ -96,6 +117,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             })
         }
 
+    }
+
+    private fun moveToFavorite() {
+        val actionToFavorite = HomeFragmentDirections.actionHomeFragmentToFavoriteFragment()
+        findNavController().navigate(actionToFavorite)
     }
 
 

@@ -1,12 +1,12 @@
-package com.tafh.githubuserapp.adapters
+package com.tafh.githubuserapp.ui.adapter
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.tafh.githubuserapp.ui.fragment.FollowerFragment
-import com.tafh.githubuserapp.ui.fragment.FollowingFragment
-import com.tafh.githubuserapp.ui.fragment.RepositoryFragment
+import com.tafh.githubuserapp.ui.follower.FollowerFragment
+import com.tafh.githubuserapp.ui.following.FollowingFragment
+import com.tafh.githubuserapp.ui.repository.RepositoryFragment
 
 class SectionPagerAdapter(activity: AppCompatActivity, val username: String) :
     FragmentStateAdapter(activity) {

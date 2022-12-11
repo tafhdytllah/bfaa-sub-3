@@ -1,4 +1,4 @@
-package com.tafh.githubuserapp.ui.fragment
+package com.tafh.githubuserapp.ui.detail
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -16,9 +16,8 @@ import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tafh.githubuserapp.R
-import com.tafh.githubuserapp.adapters.SectionPagerAdapter
+import com.tafh.githubuserapp.ui.adapter.SectionPagerAdapter
 import com.tafh.githubuserapp.databinding.FragmentDetailUserBinding
-import com.tafh.githubuserapp.viewmodel.DetailUserViewModel
 
 class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
 
