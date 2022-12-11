@@ -3,7 +3,7 @@ package com.tafh.githubuserapp.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tafh.githubuserapp.data.remote.api.RetrofitConfig
+import com.tafh.githubuserapp.data.remote.retrofit.ApiConfig
 import com.tafh.githubuserapp.data.remote.response.SearchUserResponse
 import com.tafh.githubuserapp.data.remote.response.User
 import retrofit2.Call
@@ -28,7 +28,7 @@ class HomeViewModel : ViewModel(){
     fun querySearchUser(queryString: String) {
         _isLoading.value = true
         _isEmpty.value = false
-        val apiService = RetrofitConfig.getApiService()
+        val apiService = ApiConfig.getApiService()
         val client = apiService.getSearchUser(queryString)
 
         client.enqueue(object : Callback<SearchUserResponse> {

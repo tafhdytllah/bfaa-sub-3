@@ -3,7 +3,7 @@ package com.tafh.githubuserapp.ui.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tafh.githubuserapp.data.remote.api.RetrofitConfig
+import com.tafh.githubuserapp.data.remote.retrofit.ApiConfig
 import com.tafh.githubuserapp.data.remote.response.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,7 +29,7 @@ class DetailUserViewModel : ViewModel() {
     private val _isEmpty = MutableLiveData<Boolean>()
     val isEmpty: LiveData<Boolean> = _isEmpty
 
-    private val apiService = RetrofitConfig.getApiService()
+    private val apiService = ApiConfig.getApiService()
 
     companion object {
         private const val TAG = "DetailUserViewModel"
@@ -38,7 +38,7 @@ class DetailUserViewModel : ViewModel() {
     fun getDetailUser(username: String) {
         _isLoading.value = true
         _isEmpty.value = false
-        val apiService = RetrofitConfig.getApiService()
+        val apiService = ApiConfig.getApiService()
         val client = apiService.getDetailUser(username)
 
         client.enqueue(object : Callback<UserResponse> {

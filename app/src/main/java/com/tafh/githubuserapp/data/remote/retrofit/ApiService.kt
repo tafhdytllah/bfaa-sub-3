@@ -1,4 +1,4 @@
-package com.tafh.githubuserapp.data.remote.api
+package com.tafh.githubuserapp.data.remote.retrofit
 
 import com.tafh.githubuserapp.data.remote.response.*
 import com.tafh.githubuserapp.utils.Constants.Companion.API_KEY
