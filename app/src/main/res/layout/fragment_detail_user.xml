@@ -64,9 +64,10 @@
                 android:layout_width="0dp"
                 android:layout_marginTop="8dp"
                 android:drawablePadding="4dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/empty_text"
                 app:drawableStartCompat="@drawable/ic_company"
-                app:layout_constraintEnd_toEndOf="@id/tv_name_detail_user"
+                app:layout_constraintEnd_toStartOf="@+id/btn_favorite_detail_user"
                 app:layout_constraintStart_toStartOf="@+id/tv_name_detail_user"
                 app:layout_constraintTop_toBottomOf="@+id/tv_name_detail_user"
                 tools:text="Google, Inc." />
@@ -80,7 +81,7 @@
                 android:drawablePadding="4dp"
                 android:text="@string/empty_text"
                 app:drawableStartCompat="@drawable/ic_location"
-                app:layout_constraintEnd_toStartOf="@id/btn_follow_detail_user"
+                app:layout_constraintEnd_toStartOf="@id/btn_favorite_detail_user"
                 app:layout_constraintStart_toStartOf="@+id/tv_company_detail_user"
                 app:layout_constraintTop_toBottomOf="@+id/tv_company_detail_user"
                 tools:text="Pittsburgh, PA, USA " />
@@ -170,19 +171,18 @@
 
 
             <androidx.appcompat.widget.AppCompatToggleButton
-                android:id="@+id/btn_follow_detail_user"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/bg_follow"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textOff="@string/toggle_follow"
-                android:textOn="@string/toggle_unfollow"
-                android:textSize="11sp"
+                android:id="@+id/btn_favorite_detail_user"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/toggle_favorite_selector"
+                android:textOff=""
+                android:textOn=""
+                app:layout_constraintBottom_toBottomOf="@+id/bottom_line"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_location_detail_user"
-                tools:ignore="TouchTargetSizeCheck" />
+                app:layout_constraintTop_toTopOf="@+id/tv_location_detail_user" />
+
 
             <ProgressBar
                 android:id="@+id/progress_bar_detail_user"

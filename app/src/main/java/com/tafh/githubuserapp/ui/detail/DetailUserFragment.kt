@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -99,19 +100,27 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail_user) {
         (activity as AppCompatActivity).supportActionBar?.elevation = 0f
 
         binding.apply {
-            btnFollowDetailUser.setOnCheckedChangeListener { _, isChecked ->
+            btnFavoriteDetailUser.setOnCheckedChangeListener { _, isChecked ->
                 if (!isChecked) {
-                    btnFollowDetailUser.isChecked = false
-                    btnFollowDetailUser.apply {
-                        setTextColor(Color.parseColor("#FFFFFFFF"))
-                        setBackgroundResource(R.drawable.bg_follow)
-                    }
+//                    isFavorite = false
+//                    detailUserViewModel.deleteFavoriteByLogin(username)
+//                    deleteFavoriteLocalData(username)
+                    btnFavoriteDetailUser.isChecked = false
+                    Toast.makeText(
+                        requireContext(),
+                        "Unfavorite",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
-                    btnFollowDetailUser.isChecked = true
-                    btnFollowDetailUser.apply {
-                        setTextColor(Color.parseColor("#FF000000"))
-                        setBackgroundResource(R.drawable.bg_unfollow)
-                    }
+//                    isFavorite = true
+//                    setLocalData()
+//                    detailUserViewModel.insertFavorite(userFavorite)
+                    btnFavoriteDetailUser.isChecked = true
+                    Toast.makeText(
+                        requireContext(),
+                        "Favorite",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
