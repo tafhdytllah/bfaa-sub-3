@@ -8,21 +8,18 @@ import androidx.room.PrimaryKey
 class UserEntity(
     @field:PrimaryKey(autoGenerate = true)
     @field:ColumnInfo(name = "id")
-    val id: Int,
+    var id: Int = 0,
 
     @field:ColumnInfo(name = "username")
-    val username: String,
+    var username: String? = null,
 
     @field:ColumnInfo(name = "avatar_url")
-    val avatarUrl: String,
+    var avatarUrl: String? = null,
 
     @field:ColumnInfo(name = "html_url")
-    val htmlUrl: String? = null,
-
-    @field:ColumnInfo(name = "url")
-    val url: String? = null,
+    var htmlUrl: String? = null,
 
     @field:ColumnInfo(name = "favorited")
-    var isFavorited: Boolean
+    var isFavorited: Boolean? = null
 
 )

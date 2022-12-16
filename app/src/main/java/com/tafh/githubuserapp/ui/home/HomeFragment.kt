@@ -1,8 +1,6 @@
 package com.tafh.githubuserapp.ui.home
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.*
@@ -19,19 +17,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tafh.githubuserapp.R
-import com.tafh.githubuserapp.ui.adapter.UserAdapter
-import com.tafh.githubuserapp.data.remote.response.User
+import com.tafh.githubuserapp.data.remote.response.SearchItem
 import com.tafh.githubuserapp.databinding.FragmentHomeBinding
+import com.tafh.githubuserapp.ui.adapter.HomeAdapter
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val homeViewModel by viewModels<HomeViewModel>()
 
-    companion object {
-        private const val STATE_USER = "state_result"
+    private val homeViewModel: HomeViewModel by viewModels {
+        HomeViewModelFactory.getInstance(requireActivity())
     }
 
     override fun onCreateView(
@@ -39,40 +36,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.hide()
 
-        (activity as AppCompatActivity).supportActionBar?.hide()
-        binding.apply {
-            toolbarHome.setNavigationOnClickListener { it.findNavController().navigateUp() }
-            toolbarHome.inflateMenu(R.menu.menu_home)
-            toolbarHome.setOnMenuItemClickListener(object : Toolbar.OnMenuItemClickListener {
-                override fun onMenuItemClick(item: MenuItem?): Boolean {
-                    when (item?.itemId) {
-                        R.id.action_favorite -> {
-                            moveToFavorite()
-                            return true
-                        }
-                        else -> {
-                            return false
-                        }
-                    }
-                }
-            })
+        setToolBar()
+
+        homeViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
         }
 
-        homeViewModel.isLoading.observe(viewLifecycleOwner, {
-            showLoading(it)
-        })
-
-        homeViewModel.isEmpty.observe(viewLifecycleOwner, {
+        homeViewModel.isEmpty.observe(viewLifecycleOwner) {
             showEmptyData(it)
-        })
+        }
 
         val layoutManager: RecyclerView.LayoutManager
         if (requireContext().resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -80,7 +58,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         } else {
             layoutManager = LinearLayoutManager(requireContext())
         }
-
         binding.rvListUser.layoutManager = layoutManager
 
         homeViewModel.users.observe(viewLifecycleOwner) { users ->
@@ -96,8 +73,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     if (query != null && query.length >= 3) {
-                        subscribeData(query)
-
+                        binding.rvListUser.scrollToPosition(0)
+                        homeViewModel.querySearchUser(query)
                         clearFocus()
                     } else {
                         Toast.makeText(
@@ -119,35 +96,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
-    private fun moveToFavorite() {
-        val actionToFavorite = HomeFragmentDirections.actionHomeFragmentToFavoriteFragment()
-        findNavController().navigate(actionToFavorite)
-    }
-
-
-    private fun subscribeData(query: String) {
-        binding.rvListUser.scrollToPosition(0)
-
-        homeViewModel.querySearchUser(query)
-    }
-
-    private fun setUserData(users: List<User>) {
+    private fun setUserData(users: List<SearchItem>) {
         binding.rvListUser.apply {
 
-            val usersAdapter = UserAdapter(users)
+            val usersAdapter = HomeAdapter(users)
             adapter = usersAdapter
 
-            usersAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
-                override fun onItemClicked(data: User) {
+            usersAdapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: SearchItem?) {
                     val actionToDetailUser = HomeFragmentDirections.actionHomeFragmentToDetailUserFragment(
-                        data.login
+                        data?.login.toString(), data?.avatarUrl.toString(), data?.htmlUrl.toString()
                     )
                     findNavController().navigate(actionToDetailUser)
                 }
             })
 
             setOnTouchListener(object : View.OnTouchListener {
-                @SuppressLint("ClickableViewAccessibility")
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                     when (event?.action) {
                         MotionEvent.ACTION_MOVE -> binding.swSearchUser.clearFocus()
@@ -158,6 +122,32 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             })
 
         }
+    }
+
+    private fun setToolBar() {
+        (activity as AppCompatActivity).supportActionBar?.hide()
+        binding.apply {
+            toolbarHome.setNavigationOnClickListener { it.findNavController().navigateUp() }
+            toolbarHome.inflateMenu(R.menu.menu_home)
+            toolbarHome.setOnMenuItemClickListener(object : Toolbar.OnMenuItemClickListener {
+                override fun onMenuItemClick(item: MenuItem?): Boolean {
+                    return when (item?.itemId) {
+                        R.id.action_favorite -> {
+                            moveToFavorite()
+                            true
+                        }
+                        else -> {
+                            false
+                        }
+                    }
+                }
+            })
+        }
+    }
+
+    private fun moveToFavorite() {
+        val actionToFavorite = HomeFragmentDirections.actionHomeFragmentToFavoriteFragment()
+        findNavController().navigate(actionToFavorite)
     }
 
     private fun showLoading(isLoading: Boolean) {

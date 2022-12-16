@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import com.tafh.githubuserapp.R
 import com.tafh.githubuserapp.ui.MainActivity
+import com.tafh.githubuserapp.utils.Constants.countDownSplash
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
@@ -18,7 +19,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             callNextActivity()
-        }, 3000)
+        }, countDownSplash)
     }
 
     private fun callNextActivity() {

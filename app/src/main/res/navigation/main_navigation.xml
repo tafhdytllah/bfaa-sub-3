@@ -23,12 +23,21 @@
         android:name="com.tafh.githubuserapp.ui.detail.DetailUserFragment"
         android:label="fragment_detail_user"
         tools:layout="@layout/fragment_detail_user" >
-        <argument
-            android:name="usernameDetail"
-            app:argType="string"/>
         <action
             android:id="@+id/action_detailUserFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="login"
+            app:argType="string" />
+        <argument
+            android:name="avatarUrl"
+            app:argType="string" />
+        <argument
+            android:name="htmlUrl"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_detailUserFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/followerFragment"
@@ -54,5 +63,9 @@
         android:id="@+id/favoriteFragment"
         android:name="com.tafh.githubuserapp.ui.favorite.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_detailUserFragment"
+            app:destination="@id/detailUserFragment" />
+    </fragment>
 </navigation>

@@ -3,6 +3,10 @@ package com.tafh.githubuserapp.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.tafh.githubuserapp.data.UserRepository
+import com.tafh.githubuserapp.data.local.entity.UserEntity
+import com.tafh.githubuserapp.data.remote.response.SearchItem
+import com.tafh.githubuserapp.data.remote.response.SearchResponse
 import com.tafh.githubuserapp.data.remote.retrofit.ApiConfig
 import com.tafh.githubuserapp.data.remote.response.SearchUserResponse
 import com.tafh.githubuserapp.data.remote.response.User
@@ -10,10 +14,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel : ViewModel(){
+class HomeViewModel(private val userRepository: UserRepository) : ViewModel(){
 
-    private val _users = MutableLiveData<List<User>>()
-    val users: LiveData<List<User>> = _users
+    private val _users = MutableLiveData<List<SearchItem>>()
+    val users: LiveData<List<SearchItem>> = _users
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -21,9 +25,17 @@ class HomeViewModel : ViewModel(){
     private val _isEmpty = MutableLiveData<Boolean>()
     val isEmpty: LiveData<Boolean> = _isEmpty
 
-    companion object{
-        private const val TAG = "HomeViewModel"
-    }
+//    fun getSearchUser(query: String) = userRepository.getSearchUser(query)
+
+//    fun getBookmarkedNews() = userRepository.getFavoritedUser()
+//
+//    fun saveUser(user: UserEntity) {
+//        userRepository.setFavoritedUser(user, true)
+//    }
+//
+//    fun deleteNews(user: UserEntity) {
+//        userRepository.setFavoritedUser(user, false)
+//    }
 
     fun querySearchUser(queryString: String) {
         _isLoading.value = true
@@ -31,10 +43,10 @@ class HomeViewModel : ViewModel(){
         val apiService = ApiConfig.getApiService()
         val client = apiService.getSearchUser(queryString)
 
-        client.enqueue(object : Callback<SearchUserResponse> {
+        client.enqueue(object : Callback<SearchResponse> {
             override fun onResponse(
-                call: Call<SearchUserResponse>,
-                response: Response<SearchUserResponse>
+                call: Call<SearchResponse>,
+                response: Response<SearchResponse>
             ) {
                 _isLoading.value = false
                 if (!response.isSuccessful) {
@@ -49,7 +61,7 @@ class HomeViewModel : ViewModel(){
                 }
             }
 
-            override fun onFailure(call: Call<SearchUserResponse>, t: Throwable) {
+            override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
                 _isLoading.value = false
                 _isEmpty.value = true
             }

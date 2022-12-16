@@ -10,20 +10,24 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tafh.githubuserapp.R
+import com.tafh.githubuserapp.data.remote.response.SearchItem
 import com.tafh.githubuserapp.ui.adapter.SectionPagerAdapter.Companion.ARG_USERNAME_DETAIL
-import com.tafh.githubuserapp.ui.adapter.UserAdapter
-import com.tafh.githubuserapp.data.remote.response.User
+import com.tafh.githubuserapp.ui.adapter.HomeAdapter
 import com.tafh.githubuserapp.databinding.FragmentFollowingBinding
-import com.tafh.githubuserapp.ui.detail.DetailUserViewModel
 
 class FollowingFragment : Fragment(R.layout.fragment_following) {
 
     private var _binding: FragmentFollowingBinding? = null
     private val binding get() = _binding!!
 
-    private val followingViewModel by viewModels<DetailUserViewModel>()
+//    private val factory: DetailUserViewModelFactory = DetailUserViewModelFactory.getInstance(requireActivity())
+//    private val followingViewModel: DetailUserViewModel by viewModels {
+//        factory
+//    }
 
-    private lateinit var userAdapter: UserAdapter
+    private val followingViewModel: FollowingViewModel by viewModels()
+
+    private lateinit var homeAdapter: HomeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,18 +57,18 @@ class FollowingFragment : Fragment(R.layout.fragment_following) {
         }
     }
 
-    private fun setUserRecyclerView(listUser: List<User>) {
+    private fun setUserRecyclerView(listUser: List<SearchItem>) {
         binding.rvListUserFollowing.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
-            userAdapter = UserAdapter(listUser)
-            adapter = userAdapter
+            homeAdapter = HomeAdapter(listUser)
+            adapter = homeAdapter
 
-            userAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
-                override fun onItemClicked(data: User) {
+            homeAdapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: SearchItem?) {
                     Toast.makeText(
                         context,
-                        data.login,
+                        data?.login,
                         Toast.LENGTH_SHORT
                     ).show()
                 }

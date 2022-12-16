@@ -10,18 +10,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tafh.githubuserapp.R
+import com.tafh.githubuserapp.data.remote.response.SearchItem
 import com.tafh.githubuserapp.ui.adapter.SectionPagerAdapter.Companion.ARG_USERNAME_DETAIL
-import com.tafh.githubuserapp.ui.adapter.UserAdapter
-import com.tafh.githubuserapp.data.remote.response.User
 import com.tafh.githubuserapp.databinding.FragmentFollowerBinding
-import com.tafh.githubuserapp.ui.detail.DetailUserViewModel
+import com.tafh.githubuserapp.ui.adapter.HomeAdapter
 
 class FollowerFragment : Fragment(R.layout.fragment_follower) {
 
     private var _binding: FragmentFollowerBinding? = null
     private val binding get() = _binding!!
 
-    private val followerViewModel by viewModels<DetailUserViewModel>()
+//    private val factory: DetailUserViewModelFactory = DetailUserViewModelFactory.getInstance(requireActivity())
+//    private val followerViewModel: DetailUserViewModel by viewModels {
+//        factory
+//    }
+    private val followerViewModel: FollowerViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,16 +64,16 @@ class FollowerFragment : Fragment(R.layout.fragment_follower) {
         followerViewModel.getUserFollower(username)
     }
 
-    private fun setUserData(listUser: List<User>) {
+    private fun setUserData(listUser: List<SearchItem>) {
         binding.rvListUserFollower.apply {
-            val userAdapter = UserAdapter(listUser)
+            val userAdapter = HomeAdapter(listUser)
             adapter = userAdapter
 
-            userAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
-                override fun onItemClicked(data: User) {
+            userAdapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: SearchItem?) {
                     Toast.makeText(
                         context,
-                        data.login,
+                        data?.login,
                         Toast.LENGTH_SHORT
                     ).show()
                 }

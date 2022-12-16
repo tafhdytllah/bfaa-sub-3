@@ -21,6 +21,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_data_favorite">Your Favorite Is Empty</string>
     <string name="menu_favorite">Favorite</string>
+    <string name="save_favorite">Save Favorite?</string>
+    <string name="menu_delete">Delete Favorites</string>
+    <string name="title_favorite">Favorite List</string>
 
 
 </resources>

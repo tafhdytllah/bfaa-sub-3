@@ -14,28 +14,23 @@ import com.tafh.githubuserapp.ui.adapter.SectionPagerAdapter.Companion.ARG_USERN
 import com.tafh.githubuserapp.ui.adapter.RepoAdapter
 import com.tafh.githubuserapp.data.remote.response.Repository
 import com.tafh.githubuserapp.databinding.FragmentRepositoryBinding
-import com.tafh.githubuserapp.ui.detail.DetailUserViewModel
 
 class RepositoryFragment : Fragment(R.layout.fragment_repository) {
-
-    companion object {
-        private const val TAG = "RepositoryFragment"
-    }
 
     private var _binding: FragmentRepositoryBinding? = null
     private val binding get() = _binding!!
 
-    private val repositoryViewModel by viewModels<DetailUserViewModel>()
+//    private val factory: DetailUserViewModelFactory = DetailUserViewModelFactory.getInstance(requireActivity())
+    private val repositoryViewModel: RepositoryViewModel by viewModels()
 
     private lateinit var repoAdapter: RepoAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRepositoryBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
